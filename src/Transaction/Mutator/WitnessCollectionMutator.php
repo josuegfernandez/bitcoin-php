@@ -19,6 +19,7 @@ class WitnessCollectionMutator extends AbstractCollectionMutator
         }
 
         $this->set = \SplFixedArray::fromArray($set, false);
+        $this->iterator = $this->set->getIterator();
     }
 
     /**
@@ -26,7 +27,7 @@ class WitnessCollectionMutator extends AbstractCollectionMutator
      */
     public function current()
     {
-        return $this->set->current();
+        return $this->iterator->current();
     }
 
     /**
@@ -68,6 +69,7 @@ class WitnessCollectionMutator extends AbstractCollectionMutator
         }
 
         $this->set = \SplFixedArray::fromArray(array_slice($this->set->toArray(), $start, $length), false);
+        $this->iterator = $this->set->getIterator();
         return $this;
     }
 

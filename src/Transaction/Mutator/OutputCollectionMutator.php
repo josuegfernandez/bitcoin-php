@@ -13,6 +13,7 @@ class OutputCollectionMutator extends AbstractCollectionMutator
     {
         /** @var OutputMutator[] $set */
         $this->set = new \SplFixedArray(count($outputs));
+        $this->iterator = $this->set->getIterator();
         foreach ($outputs as $i => $output) {
             /** @var int $i */
             $this->set[$i] = new OutputMutator($output);
@@ -24,7 +25,7 @@ class OutputCollectionMutator extends AbstractCollectionMutator
      */
     public function current()
     {
-        return $this->set->current();
+        return $this->iterator->current();
     }
 
     /**
@@ -66,6 +67,7 @@ class OutputCollectionMutator extends AbstractCollectionMutator
         }
 
         $this->set = \SplFixedArray::fromArray(array_slice($this->set->toArray(), $start, $length), false);
+        $this->iterator = $this->set->getIterator();
         return $this;
     }
 
